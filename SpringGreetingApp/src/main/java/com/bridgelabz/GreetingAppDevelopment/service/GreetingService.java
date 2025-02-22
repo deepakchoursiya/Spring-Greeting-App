@@ -170,6 +170,63 @@ package com.bridgelabz.GreetingAppDevelopment.service;
 //}
 
 
+//import com.bridgelabz.GreetingAppDevelopment.model.Greeting;
+//import com.bridgelabz.GreetingAppDevelopment.repository.GreetingRepository;
+//import org.springframework.stereotype.Service;
+//
+//import java.util.List;
+//import java.util.Optional;
+//
+//@Service
+//public class GreetingService {
+//
+//    private final GreetingRepository greetingRepository;
+//
+//    public GreetingService(GreetingRepository greetingRepository) {
+//        this.greetingRepository = greetingRepository;
+//    }
+//
+//    // Save a new greeting message
+//    public Greeting createGreeting(String firstName, String lastName) {
+//        String message;
+//        if (firstName != null && lastName != null) {
+//            message = "Hello, " + firstName + " " + lastName + "!";
+//        } else if (firstName != null) {
+//            message = "Hello, " + firstName + "!";
+//        } else if (lastName != null) {
+//            message = "Hello, " + lastName + "!";
+//        } else {
+//            message = "Hello World!";
+//        }
+//
+//        return greetingRepository.save(new Greeting(message));
+//    }
+//
+//    // Retrieve all stored greetings
+//    public List<Greeting> getAllGreetings() {
+//        return greetingRepository.findAll();
+//    }
+//
+//    // Retrieve a greeting by ID
+//    public Greeting getGreetingById(Long id) {
+//        Optional<Greeting> greeting = greetingRepository.findById(id);
+//        return greeting.orElse(null);
+//    }
+//
+//    // Update a greeting message by ID
+//    public Greeting updateGreeting(Long id, String newMessage) {
+//        Optional<Greeting> optionalGreeting = greetingRepository.findById(id);
+//        if (optionalGreeting.isPresent()) {
+//            Greeting greeting = optionalGreeting.get();
+//            greeting.setMessage(newMessage);
+//            return greetingRepository.save(greeting);
+//        }
+//        return null; // Return null if greeting ID is not found
+//    }
+//}
+
+
+
 import com.bridgelabz.GreetingAppDevelopment.model.Greeting;
 import com.bridgelabz.GreetingAppDevelopment.repository.GreetingRepository;
 import org.springframework.stereotype.Service;
@@ -198,7 +255,6 @@ public class GreetingService {
         } else {
             message = "Hello World!";
         }
-
         return greetingRepository.save(new Greeting(message));
     }
 
@@ -209,8 +265,7 @@ public class GreetingService {
 
     // Retrieve a greeting by ID
     public Greeting getGreetingById(Long id) {
-        Optional<Greeting> greeting = greetingRepository.findById(id);
-        return greeting.orElse(null);
+        return greetingRepository.findById(id).orElse(null);
     }
 
     // Update a greeting message by ID
@@ -221,6 +276,15 @@ public class GreetingService {
             greeting.setMessage(newMessage);
             return greetingRepository.save(greeting);
         }
-        return null; // Return null if greeting ID is not found
+        return null; // Return null if the greeting ID is not found
+    }
+
+    // Delete a greeting message by ID
+    public boolean deleteGreeting(Long id) {
+        if (greetingRepository.existsById(id)) {
+            greetingRepository.deleteById(id);
+            return true;
+        }
+        return false; // Return false if greeting ID is not found
     }
 }
