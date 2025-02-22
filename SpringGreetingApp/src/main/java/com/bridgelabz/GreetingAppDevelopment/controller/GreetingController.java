@@ -85,6 +85,42 @@ package com.bridgelabz.GreetingAppDevelopment.controller;
 
 
 
+//import com.bridgelabz.GreetingAppDevelopment.model.Greeting;
+//import com.bridgelabz.GreetingAppDevelopment.service.GreetingService;
+//import org.springframework.web.bind.annotation.*;
+//
+//import java.util.List;
+//import java.util.Map;
+//
+//@RestController
+//@RequestMapping("/greeting")
+//public class GreetingController {
+//
+//    private final GreetingService greetingService;
+//
+//    // Constructor-based Dependency Injection
+//    public GreetingController(GreetingService greetingService) {
+//        this.greetingService = greetingService;
+//    }
+//
+//    // POST request - Create and save a greeting message
+//    @PostMapping
+//    public Map<String, String> createGreeting(
+//            @RequestParam(required = false) String firstName,
+//            @RequestParam(required = false) String lastName) {
+//        return greetingService.createGreeting(firstName, lastName);
+//    }
+//
+//    // GET request - Retrieve all stored greeting messages
+//    @GetMapping("/all")
+//    public List<Greeting> getAllGreetings() {
+//        return greetingService.getAllGreetings();
+//    }
+//}
+
+
+
+
 import com.bridgelabz.GreetingAppDevelopment.model.Greeting;
 import com.bridgelabz.GreetingAppDevelopment.service.GreetingService;
 import org.springframework.web.bind.annotation.*;
@@ -98,7 +134,6 @@ public class GreetingController {
 
     private final GreetingService greetingService;
 
-    // Constructor-based Dependency Injection
     public GreetingController(GreetingService greetingService) {
         this.greetingService = greetingService;
     }
@@ -115,5 +150,11 @@ public class GreetingController {
     @GetMapping("/all")
     public List<Greeting> getAllGreetings() {
         return greetingService.getAllGreetings();
+    }
+
+    // GET request - Retrieve a greeting by ID
+    @GetMapping("/{id}")
+    public Greeting getGreetingById(@PathVariable Long id) {
+        return greetingService.getGreetingById(id);
     }
 }
