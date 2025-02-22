@@ -36,6 +36,28 @@ package com.bridgelabz.GreetingAppDevelopment.controller;
 
 
 
+//import com.bridgelabz.GreetingAppDevelopment.service.GreetingService;
+//import org.springframework.web.bind.annotation.*;
+//
+//import java.util.Map;
+//
+//@RestController
+//@RequestMapping("/greeting")
+//public class GreetingController {
+//
+//    private final GreetingService greetingService;
+//
+//    // Constructor-based Dependency Injection
+//    public GreetingController(GreetingService greetingService) {
+//        this.greetingService = greetingService;
+//    }
+//
+//    // GET request - Fetches greeting message from Service Layer
+//    @GetMapping
+//    public Map<String, String> getGreeting() {
+//        return greetingService.getGreetingMessage();
+//    }
+//}
 import com.bridgelabz.GreetingAppDevelopment.service.GreetingService;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,9 +74,11 @@ public class GreetingController {
         this.greetingService = greetingService;
     }
 
-    // GET request - Fetches greeting message from Service Layer
+    // GET request - Fetch greeting message with optional first & last name
     @GetMapping
-    public Map<String, String> getGreeting() {
-        return greetingService.getGreetingMessage();
+    public Map<String, String> getGreeting(
+            @RequestParam(required = false) String firstName,
+            @RequestParam(required = false) String lastName) {
+        return greetingService.getGreetingMessage(firstName, lastName);
     }
 }

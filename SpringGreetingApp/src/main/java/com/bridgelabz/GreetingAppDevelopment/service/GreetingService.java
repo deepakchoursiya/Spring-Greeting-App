@@ -8,10 +8,19 @@ import java.util.Map;
 @Service
 public class GreetingService {
 
-    // Method to return a simple greeting message
-    public Map<String, String> getGreetingMessage() {
+    // Method to generate greeting message based on input
+    public Map<String, String> getGreetingMessage(String firstName, String lastName) {
         Map<String, String> response = new HashMap<>();
-        response.put("message", "Hello World");
+
+        if (firstName != null && lastName != null) {
+            response.put("message", "Hello, " + firstName + " " + lastName + "!");
+        } else if (firstName != null) {
+            response.put("message", "Hello, " + firstName + "!");
+        } else if (lastName != null) {
+            response.put("message", "Hello, " + lastName + "!");
+        } else {
+            response.put("message", "Hello World!");
+        }
         return response;
     }
 }
