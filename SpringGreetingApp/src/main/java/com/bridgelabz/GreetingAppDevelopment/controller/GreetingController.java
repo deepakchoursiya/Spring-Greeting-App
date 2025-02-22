@@ -160,6 +160,38 @@ package com.bridgelabz.GreetingAppDevelopment.controller;
 //}
 
 
+//import com.bridgelabz.GreetingAppDevelopment.model.Greeting;
+//import com.bridgelabz.GreetingAppDevelopment.service.GreetingService;
+//import org.springframework.web.bind.annotation.*;
+//
+//import java.util.List;
+//
+//@RestController
+//@RequestMapping("/greeting")
+//public class GreetingController {
+//
+//    private final GreetingService greetingService;
+//
+//    public GreetingController(GreetingService greetingService) {
+//        this.greetingService = greetingService;
+//    }
+//
+//    // POST request - Create and save a greeting message
+//    @PostMapping
+//    public Greeting createGreeting(
+//            @RequestParam(required = false) String firstName,
+//            @RequestParam(required = false) String lastName) {
+//        return greetingService.createGreeting(firstName, lastName);
+//    }
+//
+//    // GET request - Retrieve all stored greetings
+//    @GetMapping("/all")
+//    public List<Greeting> getAllGreetings() {
+//        return greetingService.getAllGreetings();
+//    }
+//}
+
+
 import com.bridgelabz.GreetingAppDevelopment.model.Greeting;
 import com.bridgelabz.GreetingAppDevelopment.service.GreetingService;
 import org.springframework.web.bind.annotation.*;
@@ -188,5 +220,17 @@ public class GreetingController {
     @GetMapping("/all")
     public List<Greeting> getAllGreetings() {
         return greetingService.getAllGreetings();
+    }
+
+    // GET request - Retrieve a greeting by ID
+    @GetMapping("/{id}")
+    public Greeting getGreetingById(@PathVariable Long id) {
+        return greetingService.getGreetingById(id);
+    }
+
+    // PUT request - Update a greeting message
+    @PutMapping("/{id}")
+    public Greeting updateGreeting(@PathVariable Long id, @RequestParam String message) {
+        return greetingService.updateGreeting(id, message);
     }
 }
